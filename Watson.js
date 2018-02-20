@@ -20,7 +20,7 @@
         .getValue(key)
         .setValue(key,value)
 
-    Key Event 
+    Key Event
     if ((event.text === "0") && !event.isAutoRepeat && !event.isShifted && !event.isMeta && event.isControl && !event.isAlt) {
 
 
@@ -36,7 +36,7 @@
     var tablet = null;
     var buttonName = "WATSON";
     var button = null;
-    var APP_URL = Script.resolvePath('./Tablet/Tablet.html');
+    var APP_URL = Script.resolvePath('./Tablet/Tablet2.html');
 
     // Function to run when tablet button is clicked
     function onTabletButtonClicked(){
@@ -44,12 +44,11 @@
     }
 
     // Get Tablet
-    tablet = Tablet.getTablet("com.highFidelity.interfance.tablet.system");
+    tablet = Tablet.getTablet("com.highfidelity.interface.tablet.system");
     button = tablet.addButton({
         text: buttonName,
         icon: "icons/tablet-icons/spectator-i.svg",
-        activeIcon: "icons/tablet-icons/spectator-a.svg",
-        isActive: false
+        activeIcon: "icons/tablet-icons/spectator-a.svg"
     });
     button.clicked.connect(onTabletButtonClicked);
 
@@ -87,4 +86,4 @@
     }
 
     Script.scriptEnding.connect(onEnding);
-});
+}());

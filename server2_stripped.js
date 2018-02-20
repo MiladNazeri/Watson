@@ -23,7 +23,8 @@ var sttAuthService = new watson.AuthorizationV1(
       username: process.env.SPEECH_TO_TEXT_USERNAME, // or hard-code credentials here
       password: process.env.SPEECH_TO_TEXT_PASSWORD
     },
-    vcapServices.getCredentials('speech_to_text') // pulls credentials from environment in bluemix, otherwise returns {}
+    {}
+    // vcapServices.getCredentials('speech_to_text') // pulls credentials from environment in bluemix, otherwise returns {}
   )
 );
 app.use('/api/speech-to-text/token', function(req, res) {
@@ -49,7 +50,8 @@ var ttsAuthService = new watson.AuthorizationV1(
       username: process.env.TEXT_TO_SPEECH_USERNAME, // or hard-code credentials here
       password: process.env.TEXT_TO_SPEECH_PASSWORD
     },
-    vcapServices.getCredentials('text_to_speech') // pulls credentials from environment in bluemix, otherwise returns {}
+    {}
+    // vcapServices.getCredentials('text_to_speech') // pulls credentials from environment in bluemix, otherwise returns {}
   )
 );
 app.use('/api/text-to-speech/token', function(req, res) {
