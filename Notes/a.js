@@ -63,3 +63,19 @@ curl -X POST -u "cb868aa6-dbb2-4ddb-839f-bff3375c6bc3":"H8Y55sXOV7NV" --header "
     "username": "22e04c8d-d66d-46b2-b61b-56882492565d",
     "password": "duzdLmD3xnsM"
 }
+
+
+
+{
+  "conversation": [
+    {
+      "name": "hifi-conversation-test-conversati-1519079219830",
+      "plan": "free",
+      "credentials": {
+        "url": "https://gateway.watsonplatform.net/conversation/api",
+        "username": "0c215bc0-dee2-40f3-861b-8b8d29bb259f",
+        "password": "BwJ5v8pSNVKG"
+      }
+    }
+  ]
+}

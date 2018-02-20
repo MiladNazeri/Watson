@@ -36,7 +36,7 @@
     var tablet = null;
     var buttonName = "WATSON";
     var button = null;
-    var APP_URL = Script.resolvePath('./Tablet/Tablet2.html');
+    var APP_URL = Script.resolvePath('./Tablet/Tablet_Conversation.html');
 
     // Function to run when tablet button is clicked
     function onTabletButtonClicked(){
@@ -68,8 +68,18 @@
     // var hasEventBridge = false;
 
     function onWebEventReceived(data){
+        print("got message");
+        print(data);
+        // Window.alert(data);
         var message;
         message = JSON.parse(data);
+        if (message.type === "create") {
+            print("in create")
+            message.action.position = inFrontOf(3);
+            message.action.dimensions = {x:3,y:3,z:3};
+
+            Entities.addEntity(message.action);
+        }
     }
     tablet.webEventReceived.connect(onWebEventReceived);
 

@@ -1,0 +1,313 @@
+overview
+=====================
+
+users interact through interfance
+
+Application -> sends user input to Coversation services
+
+-Connects to workplace(a container for dialog flow and data)
+-interprets input, directs conversation.  Gathers info.
+-Connect to additional watson services.
+
+-application interacts with backend system based on intent
+
+implementation
+=====================
+-Configure a workspace
+    -set up:
+        -training data
+            -Intents
+                -Goals that users will have when they interact
+                -For each intent add example
+                    -What time do you open?
+            -Entities
+                -Provides context for an intent
+                -Which store to provide content for
+        -dialog
+            -build a flow that incorporates intents and Entities
+            -represented graphically as a tree (dialog flow)
+            -add branch for each new intent
+            -add nodes for permutations based on Entities
+    -Deploy workspace
+
+Specifics
+=====================
+intents
+    -Always prefixed with #
+    -Provide lots of examples of user input and indicate what they map to
+Entities
+    -Always prefixed with @
+    -List possible values for entities and synonms
+dialog
+
+Creating a workspace
+=====================
+1. Launch tool
+2. create
+
+Planning intents
+=====================
+-consider what your customers might want to do
+-consider what you want to be able to handle
+- if intents represent verbs  (something the user wants to do)
+    -entities represent nouns (the object of action)
+-Entities
+    -class of objects with values representing possible objects in class
+-If you want to capture a request, or perform an action: use intent
+-If you want to capture infomration that affects how you respond: use entity
+
+- Gather as many customer:
+    -Questions
+    -Commands
+    -Other inputs as possible
+-Sort into categories based on the capabilities you want to support
+-Represents the intention you will define
+
+#turn_off
+@accesory
+    -headlights
+    -radio
+    -air conditionar
+
+Enabling system entities
+-entities shoud only be made if they change how an intent responds
+
+
+
+Dialog
+=====================
+Dialog node
+
+Condition and response
+-If condition
+-Then response
+
+Condition
+    Must be present in the user input
+        -intent
+            #intent_name
+        -Entity
+            -trigger if anything in @entity is found
+        -entity Value
+            @entity_name:value // @city:Boston
+            @us_phone.groups[1] === '617'
+
+        -Context variable value
+            $variable_name:value
+            $variable_name === 'value'
+
+    Special condition
+        -anything_else
+            triggered when nothing matches
+        -conversation_start
+            -can create context variables
+            true during the first dialog turn
+        -false
+            -prevent from being used
+        -irrelevant
+        -true
+            -end to catch nodes
+        -welcomme
+    Tips
+        -Values with special characters
+            @person: (O'Reilly)
+            @person: (O'Reilly)
+        -number Values
+            @price AND @price < 100
+                - use both because null value will give true
+
+Response
+    The response service uses to respond to the user
+    The response can be configured to trigger programmatic actions
+
+    types
+        -simple text response
+        -conditional reponses
+        -complex response
+
+    Variety
+        1.
+        2.
+        3.
+
+    Complex
+        JSON
+        {
+            "output": {
+                "text": "hello $user"
+                "text": ["Hello there.", "How are you?"]
+                "text": {
+                    "values": ["Hello", "Hi, "howdy"],
+                    "selection_policy": "random" // "sequential"
+                }
+            }
+        }
+
+        What to do next?
+            -Wait for user input
+            -skip user input
+            -Jump to another dialog node
+
+How dialog is processed
+=====================
+    "context":
+        "user_name": "<? @sys-person.literal ?>"
+            variables meant to be persisted
+    "input":
+        "text": "Where's your store?"
+    "output": {
+        "text" : {},
+        "deleted_variable" : "<? context.remove('temp') ?>"
+
+    }
+
+    Common variables
+        input.text // users whole text input
+        "<? input.text ?>"
+        "place": "@place"
+        "<? input.text.extract('^[^\\d]*[\\d]*{11}[^\\d]*$',0) ?>"
+
+
+    Slots
+        Multiple in one node
+
+        {
+          "context": {
+            "variable_name" : "variable_value"
+          },
+          "actions": [
+            {
+              "name":"<actionName>",
+              "type":"client | server",
+              "parameters": {
+                "<parameter_name>":"<parameter_value>",
+                "<parameter_name>":"<parameter_value>"
+              },
+              "result_variable": "<result_variable_name>",
+              "credentials": "<reference_to_credentials>"
+            }
+          ],
+          "output": {
+            "text": "response text"
+          }
+        }
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+- Tablet
+    - Open tablet
+- Entities
+    - Add Entity
+    - Delete Enity
+    - Edit Entity
+- Locomotion
+    - MyAvatar.position
+    - MyAvatar.orientation
+
+
+
+File
+    logout
+    help
+    quit
+Edit
+    Undo
+    Redo
+    Running Scripts
+    Open and run Script File
+    Open and run Script from URL
+    Stop All Scripts
+    Console
+    -----------------
+    Asset Browser
+    Package Model
+    Reload Content (clears all caches)
+    -----------------
+    Export entities
+    Import Entities
+    Import Entities from URL
+    Entity List
+    Parent Entity to Last
+    Unparent Enity
+    (c) Create entities as Grabbable (except zones, particles, and lights)
+    (c) Allow selecting of Large Models
+    (c) Allow selecting of small Models
+    (c) Allow Selecting of Lights
+    (c) Select All Entities in Box
+    (c) Select All entities touching box
+    Delete
+    (c) Auto Focus on Select
+    (c) Ease Orientation on Focus
+    (c) Show Lights and Particle Systems in Create Mode
+    (c) Show Zones in Create Mode
+Avatar
+    Attachments
+    Size
+        Increase
+        Decrease
+        Reset
+    Reset Sensors
+    Enable Avatar Collisions
+    Enable Flying
+    Bookmark Avatar
+    Avatar BookMarks
+    Delete Avatar BookMarks
+Display
+    Desktop
+    Fullscreen
+View
+    First Person
+    Third Person
+    Mirror
+    Independent Mode
+    Entity Mode
+    (c) center player in view
+    (c) overlays
+    (c) Enter first person mode in HMD
+Navigate
+    Show Address Bar
+    Bookmark Location
+    Set home Location
+    Bookmarks
+    Delete Bookmark
+    Copy Address to Clipboard
+    Copy Path to Clipboard
+Settings
+    (c) Advanced Menus
+    (c) Developer Menus
+    General
+    Audio
+    Avatar
+    LOD
+    Controller Settings
+    Control With Speech
+    Advanced Movement for Hand Controllers
+Developer
+Tools
+
+Toolbar
+    Audio
+    Menu
+    Bubble
+    Snap
+    Help
+    People
+    Goto
+    Market
+    Create
+    Wallet
