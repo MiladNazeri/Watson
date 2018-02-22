@@ -30,6 +30,7 @@ if (typeof Object.assign !== 'function') {
 }
 
 (function () {
+    // stole this from Zach's Spectator cam
     function inFrontOf(distance, position, orientation) {
         return Vec3.sum(position || MyAvatar.position,
             Vec3.multiply(distance, Quat.getForward(orientation || MyAvatar.orientation)));
@@ -63,6 +64,7 @@ if (typeof Object.assign !== 'function') {
         var message;
         message = JSON.parse(data);
         switch (message.type){
+            // handling messages that come back regarding creating entities
             case "create":
                     print("in create");
                     var createSettings = {
@@ -73,12 +75,14 @@ if (typeof Object.assign !== 'function') {
                     // var combinedProps = Object.assign({}, createSettings)
                     Entities.addEntity(createSettings);
                 break;
+            // handling of intentions regarding going to places
             case "goto":
                     Window.location = "hifi://" + message.action.place
                 break;
             default:
         }
     }
+    // connecting the events sent back from the tablet after watson makes decisions
     tablet.webEventReceived.connect(onWebEventReceived);
     // function to run when script is ending
     function onEnding(){

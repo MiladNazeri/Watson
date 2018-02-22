@@ -7,6 +7,7 @@
       <link rel="stylesheet" href="css/app.css">
     </head>
     <body>
+        <!-- This section allows you to switch back and forth between the conversation and the JSON watson is sending back -->
       <div id="view-change-button" class="button" onclick="PayloadPanel.togglePanel(event, this)">
         <img class="option full" src="img/Chat Button.png">
         <img class="option not-full" src="img/Code Button.png">
@@ -14,11 +15,12 @@
       <div id="contentParent" class="responsive-columns-wrapper">
         <div id="chat-column-holder" class="responsive-column content-column">
           <div class="chat-column">
+              <!-- Section to handle the output of the chat -->
             <div id="scrollingChat"></div>
-            <section>
-            </section>
+            <!-- section to handle either transcribing through microphone or typing and Pushing enter. -->
             <label for="textInput" class="inputOutline">
                 <button id="watsonSpeech">Start Microphone Transcription</button>
+                <!-- Div setup to handle where the transcription output is setup -->
                 <div id="outputText"></div>
               <input id="textInput" class="input responsive-column"
                 placeholder="Or type something.  Push enter to send" type="text"
@@ -26,6 +28,7 @@
             </label>
           </div>
         </div>
+        <!-- The conversation is outputted here -->
         <div id="payload-column" class="fixed-column content-column">
           <div id="payload-initial-message">
             Type something to see the output
@@ -34,13 +37,20 @@
           <div id="payload-response" class="payload"></div>
         </div>
       </div>
+      <!-- Ibm's sdk to make speech to text and text to speech simple.
+      Uses websockets to create streams for transcription and handling audio recording and playback -->
       <script src="lib/watson-speech.js"></script>
+      <!-- common functions used between different scripts -->
       <script src="js/common.js"></script>
+      <!-- Handling of talking to the API for conversation -->
       <script src="js/api.js"></script>
+      <!-- handles the displaying of conversation from the json payloads -->
       <script src="js/conversation.js"></script>
+      <!-- Handles the speech to text transcription -->
       <script src="js/speech.js"></script>
+      <!-- Handles to request and response payload identification to keep track betweeen Watson and User -->
       <script src="js/payload.js"></script>
+      <!-- Initialize the payload and and conversation panels -->
       <script src="js/global.js"></script>
-
     </body>
 </html>

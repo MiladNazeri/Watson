@@ -43,18 +43,24 @@ var ConversationPanel = (function() {
         Api.setResponsePayload = function(newPayloadStr) {
             currentResponsePayloadSetter.call(Api, newPayloadStr);
             displayMessage(JSON.parse(newPayloadStr), settings.authorTypes.watson);
+            // Adding in my hack to handle giving the interface a voice
+
+            // grab the current response payload from Watson
             var payload = Api.getResponsePayload();
             console.log("PAYLOAD: " + JSON.stringify(payload));
-            Window.currentText = payload.output.text;
+            // set current Text to vocalize from the paylout output text
+            var currentText = payload.output.text;
+            // grab the token from the server
             fetch('/api/text-to-speech/token')
                 .then(function(response) {
+                    // convert the response to the token
                     return response.text();
                 })
                 .then(function (token) {
-                    // console.log("token")
-                    console.log("CurrentText:" + Window.currentText);
+                    // using the Watson speech SDK to synthesize a voice.  This is the default voice with no options.
+                    // there are plenty of ways to change the voice to our liking
                     WatsonSpeech.TextToSpeech.synthesize({
-                        text: Window.currentText,
+                        text: currentText,
                         token: token
                     })
                 });

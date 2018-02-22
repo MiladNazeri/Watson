@@ -95,14 +95,13 @@ var PayloadPanel = (function() {
 
     // Constructs new DOM element to use in displaying the payload
     function buildPayloadDomElement(isRequest) {
-        // console.log(isRequest);
+        // checks to see if the payload is the user or watson
         if (!isRequest) {
             var payload = Api.getResponsePayload();
-            console.log("###");
-
             console.log(JSON.stringify(payload));
-
+            // checks to see if there is action in the response JSON and if so prepare to emit a webEvent back to the interface script
             if (payload.output.action) {
+                // Examples of create and goto
                 switch(payload.output.action.type){
                     case "create":
                         EventBridge.emitWebEvent(JSON.stringify({
