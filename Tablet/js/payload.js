@@ -95,21 +95,34 @@ var PayloadPanel = (function() {
 
     // Constructs new DOM element to use in displaying the payload
     function buildPayloadDomElement(isRequest) {
-        console.log(isRequest);
+        // console.log(isRequest);
         if (!isRequest) {
             var payload = Api.getResponsePayload();
-            console.log(JSON.stringify(payload));
             console.log("###");
 
+            console.log(JSON.stringify(payload));
+
             if (payload.output.action) {
-                EventBridge.emitWebEvent(JSON.stringify({
-                    type: "create",
-                    action: payload.output.action
-                }));
+                switch(payload.output.action.type){
+                    case "create":
+                        EventBridge.emitWebEvent(JSON.stringify({
+                            type: "create",
+                            action: payload.output.action
+                        }));
+                        break;
+                    case "goto":
+                        EventBridge.emitWebEvent(JSON.stringify({
+                            type: "goto",
+                            action: payload.output.action
+                        }));
+                        break;
+                }
+
             }
         }
         var payloadPrettyString = jsonPrettyPrint(isRequest
             ? Api.getRequestPayload() : Api.getResponsePayload());
+
 
         var payloadJson = {
             'tagName': 'div',

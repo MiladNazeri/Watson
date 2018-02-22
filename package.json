@@ -3,16 +3,13 @@
   "version": "1.0.0",
   "description": "Examples showing the IBM Watson Speech Javascript SDK in action.",
   "scripts": {
-    "start": "node server2_stripped.js",
-    "postinstall": "bower install"
+    "start": "node server.js",
   },
   "cacheDirectories": [
     "node_modules",
-    "static/bower_components"
   ],
   "dependencies": {
     "body-parser": "^1.18.2",
-    "bower": "^1.8.0",
     "defaults": "^1.0.3",
     "dotenv": "^4.0.0",
     "express": "^4.13.3",

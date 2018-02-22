@@ -60,7 +60,7 @@ div {
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
-  overflow: auto;
+  overflow: hidden;
 }
 
 #chat-column-holder {
@@ -322,7 +322,8 @@ html{
   }
 
   .chat-column {
-    padding-top: 4rem;
+    padding-top: 1rem;
+    padding-bottom: 2rem;
   }
 
   #payload-column {
